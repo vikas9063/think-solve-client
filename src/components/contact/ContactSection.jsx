@@ -10,7 +10,7 @@ const ContactSection = () => {
   };
 
   return (
-    <Box sx={{ padding: '80px 0', background:'linear-gradient(to right,rgba(14, 106, 165, 0.15) ,rgba(100, 10, 155, 0.25))'}}>
+    <Box sx={{ padding: '80px 0', background:'linear-gradient(60deg,rgba(14, 106, 165, 0.15) ,rgba(14, 10, 155, 0.95))'}}>
       <Container>
         <Typography variant="h4" align="center" sx={{ marginBottom: '40px', color: '#333' }}>
           Get in Touch

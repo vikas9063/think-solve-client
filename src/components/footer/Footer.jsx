@@ -20,7 +20,7 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        background: 'linear-gradient(to right, rgba(100, 10, 155, 0.75),rgba(14, 106, 165, 0.75))',
+        background: 'linear-gradient(to right, rgba(100, 10, 155, 0.95),rgba(14, 106, 165, 1))',
         color: '#fff',
         padding: '40px 0',
         marginTop: 'auto',

@@ -54,7 +54,7 @@ const NewsSection = () => {
   return (
     <Box
       sx={{
-        background: 'linear-gradient(to right, rgba(100, 10, 155, 0.75), rgba(14, 106, 165, 0.75))',
+        background: 'linear-gradient(to right, rgba(100, 10, 155, 0.95), rgba(14, 106, 165, 0.95))',
         clipPath: 'polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%)',
         padding: '80px 0',
         color: '#fff',

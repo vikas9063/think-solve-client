@@ -12,8 +12,8 @@ const Banner = () => {
                 alignItems: 'center',
                 justifyContent:'center',
                 backgroundImage: `linear-gradient(45deg, 
-                    rgba(100, 10, 155, 0.75), 
-                    rgba(14, 106, 165, 0.75)),url(${BannerImage})`,
+                    rgba(100, 10, 155, 0.9), 
+                    rgba(14, 106, 165, 0.1)),url(${BannerImage})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 color: 'white',
@@ -29,7 +29,7 @@ const Banner = () => {
                 <Typography variant="subtitle1" gutterBottom>
                     Your go-to platform for asking and answering questions.
                 </Typography>
-                <Button variant="contained" color="secondary">
+                <Button variant="contained" color="secondary" sx={{marginTop:5}}>
                     Get Started
                 </Button>
             </Box>

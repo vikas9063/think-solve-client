@@ -3,10 +3,10 @@
 import React from 'react';
 import { Box, Container, Typography, Grid, Card, CardContent } from '@mui/material';
 
-import Image1 from '../../assets/banner.jpg'; // Replace with your actual image paths
-import Image2 from '../../assets/banner.jpg';
-import Image3 from '../../assets/banner.jpg';
-import Image4 from '../../assets/banner.jpg';
+import Image1 from '../../assets/f1.avif'; // Replace with your actual image paths
+import Image2 from '../../assets/q1.png';
+import Image3 from '../../assets/a1.png';
+import Image4 from '../../assets/f12.png';
 
 import './style.css';
 

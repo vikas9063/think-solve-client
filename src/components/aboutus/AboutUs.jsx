@@ -14,7 +14,7 @@ const teamMembers = [
     image: TeamMember1,
   },
   {
-    name: 'Charlie Smith',
+    name: 'Vikas Kumar',
     role: 'Lead Developer',
     image: TeamMember2,
   },
@@ -58,7 +58,7 @@ const AboutUsSection = () => {
   return (
     <Box
       sx={{
-        background: 'linear-gradient(to right, rgba(100, 10, 155, 0.75), rgba(14, 106, 165, 0.75))',
+        background: 'linear-gradient(to right, rgba(100, 10, 155, 0.95), rgba(14, 106, 165, 0.95))',
         padding: '80px 0',
       }}
     >

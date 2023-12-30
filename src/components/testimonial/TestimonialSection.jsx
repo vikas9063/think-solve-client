@@ -35,7 +35,7 @@ const TestimonialSection = () => {
           {testimonials.map((testimonial, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column',
-              boxShadow: "rgba(100, 10, 155, 0.25) 0px 30px 60px -12px inset, rgba(14, 106, 165, 0.3) 0px 18px 36px -18px inset"
+              boxShadow: "rgba(100, 10, 155, 0.15) 0px 30px 60px -12px inset, rgba(14, 106, 165, 0.3) 0px 18px 36px -18px inset"
              }}>
                 <CardContent>
                   <Typography variant="h6" sx={{ marginBottom: '10px', color: '#333' }}>

@@ -5,6 +5,7 @@ import { Container, Typography, Box, Card, CardContent, TextField, Button } from
 import { motion, AnimatePresence } from 'framer-motion';
 import { MdPerson, MdEmail, MdLock, MdCode, MdDescription } from 'react-icons/md';
 import { SupervisedUserCircleRounded } from '@mui/icons-material';
+import { NavLink } from 'react-router-dom';
 
 const AnimatedTextField = ({ label, name, value, onChange, icon }) => {
   return (
@@ -52,7 +53,7 @@ const Register = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{marginTop:10}}>
+    <Container maxWidth="sm" sx={{marginTop:1}}>
       <Typography variant="h4" align="center" sx={{ marginBottom: '20px' }}>
         <SupervisedUserCircleRounded/>
         Register
@@ -70,10 +71,13 @@ const Register = () => {
             />
           ))}
         </AnimatePresence>
-        <Box sx={{ textAlign: 'center', marginTop: '20px' }}>
+        <Box sx={{ textAlign: 'center', marginTop: '20px' ,display:'flex',justifyContent:'space-around'}}>
         <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>
           Register
         </Button>
+        <Box>
+        <Typography variant='p'>Already have an account </Typography> <NavLink to="/login" >Login Here</NavLink>
+        </Box>
       </Box>
       </Card>
      

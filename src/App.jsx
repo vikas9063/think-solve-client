@@ -16,6 +16,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Dashboard from './components/user/dashboard/Dashboard'
+import Authlayout from './components/user/Authlayout'
+import Sidebar from './components/user/sidebar/Sidebar'
 
 
 const HomeElement = ()=>{
@@ -46,9 +48,16 @@ const router = createBrowserRouter([
     element: <Register />,
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
+    path: "/user",
+    element: <Authlayout />,
+    children: [
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
+    ],
   },
+
 ]);
 
 function App() {
@@ -56,9 +65,10 @@ function App() {
 
   return (
     <>
-      <MyAppBar />
+      {/* <MyAppBar /> */}
+      <Sidebar />
       <RouterProvider router={router} />
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

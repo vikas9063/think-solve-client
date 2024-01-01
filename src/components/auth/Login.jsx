@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { Container, Typography, Box, Card, CardContent, TextField, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { MdEmail, MdLock } from 'react-icons/md';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom';
+import { USER_INFO, setUserToLocalStorage } from '../user/Utils';
 
 const AnimatedTextField = ({ label, type, name, value, onChange, icon }) => {
     return (
@@ -42,10 +44,13 @@ const Login = () => {
         }));
     };
 
+    const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
         // Add your login logic here using formData
         console.log('Login Data:', formData);
+        setUserToLocalStorage(formData)
+        navigate('/user/dashboard')
     };
 
     return (
@@ -70,10 +75,13 @@ const Login = () => {
                     onChange={handleChange}
                     icon={<MdLock size={24} style={{ marginRight: '10px' }} />}
                 />
-                <Box sx={{ textAlign: 'center', marginTop: '20px' }}>
+                <Box sx={{ textAlign: 'center', marginTop: '20px', display: 'flex', justifyContent: 'space-around' }}>
                     <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>
                         Login
                     </Button>
+                    <Box>
+                        <Typography variant='p'>Don't have account </Typography> <NavLink to="/register" >Register Here</NavLink>
+                    </Box>
                 </Box>
             </Card>
 

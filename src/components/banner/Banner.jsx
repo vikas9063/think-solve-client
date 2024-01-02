@@ -3,8 +3,14 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import BannerImage from '../../assets/banner.jpg'; // Replace with your actual banner image path
+import { useNavigate } from 'react-router-dom';
 
 const Banner = () => {
+
+const navigate = useNavigate();
+    const handleClick=()=>{
+        navigate(`/login`)
+    }
     return (
         <Box
             sx={{
@@ -29,7 +35,7 @@ const Banner = () => {
                 <Typography variant="subtitle1" gutterBottom>
                     Your go-to platform for asking and answering questions.
                 </Typography>
-                <Button variant="contained" color="secondary" sx={{marginTop:5}}>
+                <Button variant="contained" color="secondary" sx={{marginTop:5}} onClick={handleClick}>
                     Get Started
                 </Button>
             </Box>

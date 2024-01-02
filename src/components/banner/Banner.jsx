@@ -19,7 +19,7 @@ const Banner = () => {
                 color: 'white',
                 textAlign: 'center',
                 padding: '80px 20px',
-                height: '65vh'
+                height: '90vh'
             }}
         >
             <Box>

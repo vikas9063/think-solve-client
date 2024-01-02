@@ -68,7 +68,7 @@ function App() {
       {/* <MyAppBar /> */}
       <Sidebar />
       <RouterProvider router={router} />
-      {/* <Footer /> */}
+      <Footer />
     </>
   )
 }

@@ -263,7 +263,7 @@ export default function UserNavbar() {
                             style={{ backgroundColor: "#ef233c" }}
                         //   onClick={handleLogoutConfirm}
                         >
-                            Logout
+                           <AiOutlineLogout  style={{marginRight:'3'}}/> Logout
                         </Button> : <AiOutlineLogout size="30" style={{ color: '#ef233c' }} />}
 
                     </Box>

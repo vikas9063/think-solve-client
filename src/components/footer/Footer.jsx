@@ -24,6 +24,7 @@ const Footer = () => {
         color: '#fff',
         padding: '40px 0',
         marginTop: 'auto',
+        flex:0
       }}
     >
       <Container>

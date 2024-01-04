@@ -53,12 +53,11 @@ const Register = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{marginTop:1}}>
+    <Container maxWidth="sm" sx={{ marginTop: 10 }}>
       <Typography variant="h4" align="center" sx={{ marginBottom: '20px' }}>
-        <SupervisedUserCircleRounded/>
         Register
       </Typography>
-      <Card variant="outlined" sx={{ padding: '20px' }}>
+      <Card variant="outlined" sx={{ padding: '20px 20px', margin: '15px 0px' }}>
         <AnimatePresence>
           {Object.keys(formData).map((key) => (
             <AnimatedTextField
@@ -71,16 +70,32 @@ const Register = () => {
             />
           ))}
         </AnimatePresence>
-        <Box sx={{ textAlign: 'center', marginTop: '20px' ,display:'flex',justifyContent:'space-around'}}>
-        <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>
-          Register
-        </Button>
-        <Box>
-        <Typography variant='p'>Already have an account </Typography> <NavLink to="/login" >Login Here</NavLink>
-        </Box>
-      </Box>
+        <Box
+                    sx={{
+                        textAlign: 'center',
+                        marginTop: '20px',
+                        display: 'flex',
+                        flexDirection: { xs: 'column', md: 'row' },
+                        gap:{xs:2},
+                        justifyContent: 'space-around',
+                        alignItems:{xs:'center'}
+                    }}
+                >
+                    <Button type="submit" variant="contained" color="secondary" onClick={handleSubmit}
+                    sx={{
+                        width:{xs:'150px'}
+
+                    }}
+                    >
+                        Register
+                    </Button>
+                    <Box>
+                        <Typography variant="p">Already have an account? </Typography>
+                        <NavLink to="/login">Login Here</NavLink>
+                    </Box>
+                </Box>
       </Card>
-     
+
     </Container>
   );
 };

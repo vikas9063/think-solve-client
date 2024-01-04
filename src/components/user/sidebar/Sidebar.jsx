@@ -13,7 +13,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Outlet, useNavigate } from "react-router-dom";
 import logo from './../../../assets/logo.jpg'
 import {
     Avatar,
@@ -28,10 +27,14 @@ import FolderCopyIcon from "@mui/icons-material/FolderCopy";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import PeopleIcon from "@mui/icons-material/People";
 import FeedIcon from "@mui/icons-material/Feed";
-import { useTheme } from "@emotion/react";
 import FolderIcon from "@mui/icons-material/Folder";
 import { AiOutlineLogout } from "react-icons/ai";
-import { isUserLoggedIn } from "../UserService";
+import { useDispatch, useSelector } from "react-redux";
+import { doLogout } from "../slices/userSlice";
+import { IS_MOBILE } from "../Utils";
+import { Outlet } from "react-router-dom";
+import { useTheme } from "@emotion/react";
+
 
 
 
@@ -52,9 +55,9 @@ const closedMixin = (theme) => ({
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: `calc(${theme.spacing(7)} + 1px)`,
+    width: `calc(${theme.spacing(0)} + 1px)`,
     [theme.breakpoints.up("sm")]: {
-        width: `calc(${theme.spacing(8)} + 1px)`,
+        width: `calc(${theme.spacing(0)} + 1px)`,
     },
 });
 
@@ -103,36 +106,51 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function UserNavbar() {
+
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     const [open, setOpen] = React.useState(!isMobile);
 
+    // Login Check From Redux Store 
+
+    const islogin = useSelector((state) => state.loginCheck.value);
+    const dispatch = useDispatch();
+
+    //Logout Function
+    const handleLogOut = () => {
+        console.log('Inside Logout Function:');
+        localStorage.clear();
+        dispatch(doLogout());
+        window.location.href = "/";
+    }
+
 
 
     return (
-        <Box sx={{ display: "flex" }}>
-            <CssBaseline />
-            <AppBar position="fixed" style={{ backgroundColor: "#faf9f9" }}>
-                <Toolbar color="primary">
-                    <Box
-                        sx={{
-                            display: "flex",
-                            width: "100%",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <Box sx={{ display: "flex", alignItems: "center" }}>
-                            {isUserLoggedIn() && <IconButton
-                                style={{ color: "#003E70" }}
-                                color="inherit"
-                                aria-label="open drawer"
-                                onClick={() => setOpen(!open)}
-                                edge="start"
-                            >
-                                <MenuIcon />
-                            </IconButton>}
-                            <img src={logo} alt="Logo" style={{ height: '55px', marginRight: '16px', objectFit: 'cover' }} />
-                            {/* <img
+        <Box>
+            <Box sx={{ display: "flex" }}>
+                <CssBaseline />
+                <AppBar position="fixed" style={{ backgroundColor: "#faf9f9" }}>
+                    <Toolbar color="primary">
+                        <Box
+                            sx={{
+                                display: "flex",
+                                width: "100%",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            <Box sx={{ display: "flex", alignItems: "center" }}>
+                                {islogin && <IconButton
+                                    style={{ color: "#003E70" }}
+                                    color="inherit"
+                                    aria-label="open drawer"
+                                    onClick={() => setOpen(!open)}
+                                    edge="start"
+                                >
+                                    <MenuIcon />
+                                </IconButton>}
+                                <img src={logo} alt="Logo" style={{ height: '55px', marginRight: '16px', objectFit: 'cover' }} />
+                                {/* <img
                 src="/assets/main-logo.jpg"
                 alt=""
                 style={{
@@ -141,133 +159,148 @@ export default function UserNavbar() {
                   mixBlendMode: "darken",
                 }}
               /> */}
+                            </Box>
+                            <Box>
+                                <Tooltip title="click to open">
+                                    <IconButton sx={{ pr: "10%" }}>
+                                        <Avatar alt="A" src="/static/images/avatar/2.jpg" />
+                                    </IconButton>
+                                </Tooltip>
+                            </Box>
                         </Box>
-                        <Box>
-                            <Tooltip title="click to open">
-                                <IconButton sx={{ pr: "10%" }}>
-                                    <Avatar alt="A" src="/static/images/avatar/2.jpg" />
-                                </IconButton>
-                            </Tooltip>
-                        </Box>
-                    </Box>
-                </Toolbar>
-            </AppBar>
-            <Box sx={{ position: "absolute" }}>
-                {isUserLoggedIn() && <Drawer
-                    variant="permanent"
-                    open={open}
-                    PaperProps={{
-                        sx: {
-                            backgroundColor: "#faf9f9",
-                            position: "fixed",
-                            boxShadow:
-                                "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
-                        },
-                    }}
-                >
-                    <DrawerHeader></DrawerHeader>
-                    <Divider />
-                    <List>
-                        {[
-                            {
-                                id: "1",
-                                name: "Dashboard",
-                                icon: <DashboardIcon />,
-                                link: "/user/dashboard",
+                    </Toolbar>
+                </AppBar>
+                <Box sx={{ position: "absolute" }}>
+                    {islogin && <Drawer
+                        variant="permanent"
+                        open={open}
+                        PaperProps={{
+                            sx: {
+                                backgroundColor: "#faf9f9",
+                                position: "fixed",
+                                boxShadow:
+                                    "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
                             },
-                            {
-                                id: "2",
-                                name: "Profile",
-                                icon: <PersonIcon />,
-                                link: "/user/profile",
-                            },
-                            {
-                                id: "3",
-                                name: "Users",
-                                icon: <PeopleIcon />,
-                                link: "/user/all-users",
-                            },
-                            {
-                                id: "4",
-                                name: "My Documents",
-                                icon: <FolderIcon />,
-                                link: "/user/my-documents",
-                            },
-
-                            {
-                                id: "5",
-                                name: "Send Documents",
-                                icon: <DriveFolderUploadIcon />,
-                                link: "/user/documents",
-                            },
-                            {
-                                id: "6",
-                                name: "All Documents",
-                                icon: <FolderCopyIcon />,
-                                link: "/user/all-users-documents",
-                            },
-
-                            {
-                                id: "7",
-                                name: "News",
-                                icon: <FeedIcon />,
-                                link: "/user/blog",
-                            },
-                        ].map((text, index) => (
-                            <ListItem
-                                key={text.id}
-                                disablePadding
-                                sx={{ display: "block" }}
-                                // onClick={() => handleNavClick(text.link)}
-                                // selected={activeItem === text.link}
-                                button
-                            >
-                                <ListItemButton
-                                    sx={{
-                                        minHeight: 48,
-                                        justifyContent: open ? "initial" : "center",
-                                        px: 2.5,
-                                    }}
-                                >
-                                    <ListItemIcon
-                                        sx={{
-                                            minWidth: 0,
-                                            mr: open ? 3 : "auto",
-                                            justifyContent: "center",
-                                            color: '#3D0844'
-
-                                        }}
-                                    >
-                                        {text.icon}
-                                    </ListItemIcon>
-                                    <ListItemText
-                                        primary={text.name}
-                                        sx={{
-                                            opacity: open ? 1 : 0,
-                                        }}
-                                    />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
-                    </List>
-                    <Box
-                        sx={{
-                            position: "absolute",
-                            bottom: "50px", // Adjust the bottom spacing as needed
-                            left: "50%",
-                            transform: "translateX(-50%)",
                         }}
                     >
-                        {open ? <Button
-                            variant="contained"
-                            style={{ backgroundColor: "#ef233c" }}
-                        //   onClick={handleLogoutConfirm}
-                        >
-                           <AiOutlineLogout  style={{marginRight:'3'}}/> Logout
-                        </Button> : <AiOutlineLogout size="30" style={{ color: '#ef233c' }} />}
+                        <DrawerHeader></DrawerHeader>
+                        <Divider />
+                        <List>
+                            {[
+                                {
+                                    id: "1",
+                                    name: "Dashboard",
+                                    icon: <DashboardIcon />,
+                                    link: "/user/dashboard",
+                                },
+                                {
+                                    id: "2",
+                                    name: "Profile",
+                                    icon: <PersonIcon />,
+                                    link: "/user/profile",
+                                },
+                                {
+                                    id: "3",
+                                    name: "Users",
+                                    icon: <PeopleIcon />,
+                                    link: "/user/all-users",
+                                },
+                                {
+                                    id: "4",
+                                    name: "My Documents",
+                                    icon: <FolderIcon />,
+                                    link: "/user/my-documents",
+                                },
 
-                    </Box>
-                </Drawer>}
+                                {
+                                    id: "5",
+                                    name: "Send Documents",
+                                    icon: <DriveFolderUploadIcon />,
+                                    link: "/user/documents",
+                                },
+                                {
+                                    id: "6",
+                                    name: "All Documents",
+                                    icon: <FolderCopyIcon />,
+                                    link: "/user/all-users-documents",
+                                },
+
+                                {
+                                    id: "7",
+                                    name: "News",
+                                    icon: <FeedIcon />,
+                                    link: "/user/blog",
+                                },
+                            ].map((text, index) => (
+                                <ListItem
+                                    key={text.id}
+                                    disablePadding
+                                    sx={{ display: "block" }}
+                                    // onClick={() => handleNavClick(text.link)}
+                                    // selected={activeItem === text.link}
+                                    button
+                                >
+                                    <ListItemButton
+                                        sx={{
+                                            minHeight: 48,
+                                            justifyContent: open ? "initial" : "center",
+                                            px: 2.5,
+                                        }}
+                                    >
+                                        <ListItemIcon
+                                            sx={{
+                                                minWidth: 0,
+                                                mr: open ? 3 : "auto",
+                                                justifyContent: "center",
+                                                color: '#3D0844'
+
+                                            }}
+                                        >
+                                            {text.icon}
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary={text.name}
+                                            sx={{
+                                                opacity: open ? 1 : 0,
+                                            }}
+                                        />
+                                    </ListItemButton>
+                                </ListItem>
+                            ))}
+                        </List>
+                        <Box
+                            sx={{
+                                position: "absolute",
+                                bottom: "50px", // Adjust the bottom spacing as needed
+                                left: "50%",
+                                transform: "translateX(-50%)",
+                            }}
+                        >
+                            {open ? <Button onClick={handleLogOut}
+                                variant="contained"
+                                style={{ backgroundColor: "#ef233c" }}
+                            //   onClick={handleLogoutConfirm}
+                            >
+                                <AiOutlineLogout style={{ marginRight: '3' }} /> Logout
+                            </Button> : <AiOutlineLogout size="30" style={{ color: '#ef233c' }}
+                                onClick={handleLogOut}
+                            />}
+
+                        </Box>
+                    </Drawer>}
+                </Box>
+                <Box
+                    component="main"
+                    sx={{
+                        flexGrow: 1,
+                        padding: !isMobile ? 2 : 1,
+                        //   pl: { xs: 8, md: 10, xl: 32, lg: 32 },
+                        marginLeft: !isMobile ? (!open ? -1 : 30) : 0,
+                    }}
+                >
+                    <DrawerHeader />
+                    <Outlet />
+                </Box>
             </Box>
         </Box>
     );

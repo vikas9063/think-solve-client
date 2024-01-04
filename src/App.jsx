@@ -13,6 +13,7 @@ import NewsSection from './components/news/NewsSection'
 import TestimonialSection from './components/testimonial/TestimonialSection'
 import {
   createBrowserRouter,
+  Outlet,
   RouterProvider,
 } from "react-router-dom";
 import Dashboard from './components/user/dashboard/Dashboard'
@@ -20,32 +21,46 @@ import Authlayout from './components/user/Authlayout'
 import Sidebar from './components/user/sidebar/Sidebar'
 
 
-const HomeElement = ()=>{
-  return(
+const Root = () => {
+  return (<>
+    <MyAppBar />
+    <Outlet />
+    <Footer />
+  </>)
+}
+
+const HomeElement = () => {
+  return (
     <>
-        <Banner />
-        <FeaturesSection />
-        <AboutUsSection />
-        <HowItWorksSection />
-        <NewsSection />
-        <TestimonialSection />
-        <ContactSection />
-      </> 
+      <Banner />
+      <FeaturesSection />
+      <AboutUsSection />
+      <HowItWorksSection />
+      <NewsSection />
+      <TestimonialSection />
+      <ContactSection />
+    </>
   )
 }
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomeElement />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
+    element: <Root />,
+    children: [
+      {
+        path: "/",
+        element: <HomeElement />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+    ],
   },
   {
     path: "/user",
@@ -55,6 +70,7 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: <Dashboard />,
       },
+      
     ],
   },
 
@@ -66,9 +82,9 @@ function App() {
   return (
     <>
       {/* <MyAppBar /> */}
-      <Sidebar />
+
       <RouterProvider router={router} />
-      <Footer />
+
     </>
   )
 }

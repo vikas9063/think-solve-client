@@ -1,5 +1,12 @@
+import { useMediaQuery } from "@mui/material";
+import { useTheme } from "@emotion/react";
+
 // Constants
 export const USER_INFO='userInfo';
+export const IS_MOBILE = () => {
+    const theme = useTheme();
+    return useMediaQuery(theme.breakpoints.down("sm"));
+};
 
 
 

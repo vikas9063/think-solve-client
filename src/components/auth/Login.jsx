@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 import { MdEmail, MdLock } from 'react-icons/md';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { USER_INFO, setUserToLocalStorage } from '../user/Utils';
+import { useDispatch } from 'react-redux';
+import { doLogin } from '../user/slices/userSlice';
 
 const AnimatedTextField = ({ label, type, name, value, onChange, icon }) => {
     return (
@@ -31,6 +33,7 @@ const AnimatedTextField = ({ label, type, name, value, onChange, icon }) => {
 };
 
 const Login = () => {
+    const dispatch = useDispatch()
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -50,15 +53,16 @@ const Login = () => {
         // Add your login logic here using formData
         console.log('Login Data:', formData);
         setUserToLocalStorage(formData)
+        dispatch(doLogin());
         navigate('/user/dashboard')
     };
 
     return (
-        <Container maxWidth="sm" sx={{ marginTop: 10 }}>
+        <Container maxWidth="sm" sx={{ marginTop: 10, height: '60vh' }}>
             <Typography variant="h4" align="center" sx={{ marginBottom: '20px' }}>
                 Login
             </Typography>
-            <Card variant="outlined" sx={{ padding: '20px' }}>
+            <Card variant="outlined" sx={{ padding: '50px 20px' }}>
                 <AnimatedTextField
                     label="Email"
                     type="email"
@@ -75,12 +79,28 @@ const Login = () => {
                     onChange={handleChange}
                     icon={<MdLock size={24} style={{ marginRight: '10px' }} />}
                 />
-                <Box sx={{ textAlign: 'center', marginTop: '20px', display: 'flex', justifyContent: 'space-around' }}>
-                    <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>
+                <Box
+                    sx={{
+                        textAlign: 'center',
+                        marginTop: '20px',
+                        display: 'flex',
+                        flexDirection: { xs: 'column', md: 'row' },
+                        gap:{xs:2},
+                        justifyContent: 'space-around',
+                        alignItems:{xs:'center'}
+                    }}
+                >
+                    <Button type="submit" variant="contained" color="secondary" onClick={handleSubmit}
+                    sx={{
+                        width:{xs:'150px'}
+
+                    }}
+                    >
                         Login
                     </Button>
                     <Box>
-                        <Typography variant='p'>Don't have account </Typography> <NavLink to="/register" >Register Here</NavLink>
+                        <Typography variant="p">Don't have an account? </Typography>
+                        <NavLink to="/register">Register Here</NavLink>
                     </Box>
                 </Box>
             </Card>

@@ -49,15 +49,15 @@ const openedMixin = (theme) => ({
     overflowX: "hidden",
 });
 
-const closedMixin = (theme) => ({
+const closedMixin = (theme,isMobile) => ({
     transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: `calc(${theme.spacing(0)} + 1px)`,
+    width: `calc(${theme.spacing(isMobile ? 0:7)} + 1px)`,
     [theme.breakpoints.up("sm")]: {
-        width: `calc(${theme.spacing(0)} + 1px)`,
+        width: `calc(${theme.spacing(isMobile ? 0:9)} + 1px)`,
     },
 });
 
@@ -90,7 +90,7 @@ const AppBar = styled(MuiAppBar, {
 
 const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+})(({ theme, open ,isMobile }) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: "nowrap",
@@ -100,8 +100,8 @@ const Drawer = styled(MuiDrawer, {
         "& .MuiDrawer-paper": openedMixin(theme),
     }),
     ...(!open && {
-        ...closedMixin(theme),
-        "& .MuiDrawer-paper": closedMixin(theme),
+        ...closedMixin(theme,isMobile),
+        "& .MuiDrawer-paper": closedMixin(theme,isMobile),
     }),
 }));
 
@@ -174,6 +174,7 @@ export default function UserNavbar() {
                     {islogin && <Drawer
                         variant="permanent"
                         open={open}
+                        isMobile = {isMobile}
                         PaperProps={{
                             sx: {
                                 backgroundColor: "#faf9f9",
@@ -293,9 +294,10 @@ export default function UserNavbar() {
                     component="main"
                     sx={{
                         flexGrow: 1,
-                        padding: !isMobile ? 2 : 1,
+                        padding: !isMobile ? (!open?'12px 65px' : '12px') : 1,
                         //   pl: { xs: 8, md: 10, xl: 32, lg: 32 },
-                        marginLeft: !isMobile ? (!open ? -1 : 30) : 0,
+                        marginLeft: !isMobile ? (!open ? 2 : 30) : 0,
+                        backgroundColor:'#F8F1FF'
                     }}
                 >
                     <DrawerHeader />

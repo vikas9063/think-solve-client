@@ -16,9 +16,9 @@ import {
   Outlet,
   RouterProvider,
 } from "react-router-dom";
-import Dashboard from './components/user/dashboard/Dashboard'
+import Dashboard from './pages/dashboard/Dashboard'
 import Authlayout from './components/user/Authlayout'
-import Sidebar from './components/user/sidebar/Sidebar'
+
 
 
 const Root = () => {

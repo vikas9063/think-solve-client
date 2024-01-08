@@ -125,14 +125,14 @@ const TopicsAndPopular = () => {
         <>
             <Grid container spacing={2} sx={{ marginTop: '5px' }}>
                 <Grid item xs={12} sm={8}>
-                    <Paper style={{ padding: 15, textAlign: 'center', height: {xs:'55vh',sm:'55vh',md:'60vh'} }}>
+                    <Paper style={{ padding: 15, textAlign: 'center', height: {xs:'450px',sm:'450px',md:'450px'} }}>
                         <Box>                            
                             <AnimatedBarChart data={data} />
                         </Box>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <Paper style={{ padding: 15, textAlign: 'center', height: {xs:'55vh',sm:'55vh',md:'60vh'} }}>
+                    <Paper style={{ padding: 15, textAlign: 'center', height: {xs:'450px',sm:'450px',md:'450px'} }}>
                         <PopularPersons cardData={PersonsData}/>
                     </Paper>
                 </Grid>

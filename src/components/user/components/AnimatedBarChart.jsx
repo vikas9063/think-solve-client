@@ -27,7 +27,7 @@ const AnimatedBarChart = ({ data }) => {
         <Typography variant='h4'>Animated Bar Chart</Typography>
         <Chart
             width={'100%'}
-            height={'40vh'}
+            height={'295px'}
             chartType="BarChart"
             loader={<div>Loading Chart...</div>}
             data={[

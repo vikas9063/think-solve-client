@@ -104,7 +104,7 @@ const AnimatedPieChart = ({ data }) => {
     return (
         <Chart
             width={'100%'}
-            height={'375px'}
+            height={'365px'}
             chartType="PieChart"
             loader={<div>Loading Chart...</div>}
             data={[['Language', 'Popularity'], ...chartData]}
@@ -131,21 +131,19 @@ const TopPostsRankings = () => {
         <>
             <Grid container spacing={2} sx={{ marginTop: '2px' }}>
                 <Grid item xs={12} sm={4}>
-                    <Paper style={{ padding: 15, textAlign: 'center', height: '65vh' }}>
+                    <Paper style={{ padding: 15, textAlign: 'center', height: {xs:'465px',sm:'600px',md:'500px'} }}>
                         <PopularPersons cardData={PersonsData} />
-
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <Paper style={{ padding: 15, textAlign: 'center', height: {sm:'65vh',xs:'55vh'} }}>
+                    <Paper style={{ padding: 15, textAlign: 'center', height:{xs:'450px',sm:'550px',md:'450px'} }}>
                         <Typography variant='h6'>Popular Programming Languages</Typography>
                         <AnimatedPieChart data={programmingData} />
                         <Button color="secondary" >View All</Button>
                     </Paper>
-
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <Paper style={{ padding: 15, textAlign: 'center', height: '65vh' }}>
+                    <Paper style={{ padding: 15, textAlign: 'center', height: {xs:'465px',sm:'600px',md:'500px'} }}>
                     <PopularPersons cardData={LatestRankings} />
                     </Paper>
                 </Grid>

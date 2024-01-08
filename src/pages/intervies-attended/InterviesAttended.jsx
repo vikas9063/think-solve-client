@@ -55,7 +55,7 @@ const InterviesAttended = () => {
                     <Box sx={{ padding: '0px 10px', overflowX: 'auto' }}>
                         <TableContainer>
                             <Table>
-                                <TableHead>
+                                <TableHead sx={{background:'#F3E5FE'}}>
                                     <TableRow>
                                         {columns.map((column) => (
                                             <TableCell key={column.id} style={{ minWidth: column.minWidth }}>

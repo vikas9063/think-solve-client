@@ -32,7 +32,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { doLogout } from "../slices/userSlice";
 import { IS_MOBILE } from "../Utils";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 
 
@@ -110,11 +110,13 @@ export default function UserNavbar() {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     const [open, setOpen] = React.useState(!isMobile);
+    const navigate = useNavigate();
 
     // Login Check From Redux Store 
 
     const islogin = useSelector((state) => state.loginCheck.value);
     const dispatch = useDispatch();
+
 
     //Logout Function
     const handleLogOut = () => {
@@ -124,6 +126,15 @@ export default function UserNavbar() {
         window.location.href = "/";
     }
 
+    const handleNavClick = (link)=>{
+        console.log('Inside Logout Function: ',link );
+        if(isMobile){
+            setOpen(false);
+            navigate(link);
+        }else{
+            navigate(link);
+        }
+    }
 
 
     return (
@@ -237,7 +248,7 @@ export default function UserNavbar() {
                                     key={text.id}
                                     disablePadding
                                     sx={{ display: "block" }}
-                                    // onClick={() => handleNavClick(text.link)}
+                                    onClick={() => handleNavClick(text.link)}
                                     // selected={activeItem === text.link}
                                     button
                                 >

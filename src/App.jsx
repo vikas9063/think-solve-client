@@ -18,6 +18,7 @@ import {
 } from "react-router-dom";
 import Dashboard from './pages/dashboard/Dashboard'
 import Authlayout from './components/user/Authlayout'
+import Profile from './pages/profile/Profile'
 
 
 
@@ -70,7 +71,11 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: <Dashboard />,
       },
-      
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+
     ],
   },
 

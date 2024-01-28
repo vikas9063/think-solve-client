@@ -190,8 +190,9 @@ export default function UserNavbar() {
                             sx: {
                                 backgroundColor: "#faf9f9",
                                 position: "fixed",
-                                boxShadow:
-                                    "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
+                                boxShadow:'none',
+                                borderRight: '2px solid rgba(144, 3, 252, 0.1)'
+                                    
                             },
                         }}
                     >
@@ -308,7 +309,7 @@ export default function UserNavbar() {
                         padding: !isMobile ? (!open?'12px 65px' : '12px') : 1,
                         //   pl: { xs: 8, md: 10, xl: 32, lg: 32 },
                         marginLeft: !isMobile ? (!open ? 2 : 30) : 0,
-                        backgroundColor:'#F8F1FF'
+                        backgroundColor:'#f5f5f5'
                     }}
                 >
                     <DrawerHeader />

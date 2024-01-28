@@ -3,32 +3,127 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Paper, Typography, Avatar, Grid, Box, Button, Card, CardContent, Container, Divider } from '@mui/material';
 import profileImg from './../../assets/team2.jpg'
-import FolderIcon from '@mui/icons-material/Folder';
+import locationGif from './../../assets/location.gif'
+import workerGif from './../../assets/worker.gif'
+import clockGif from './../../assets/clock.gif'
+import { FcBusinessman,FcTreeStructure ,FcSupport,FcGlobe  ,FcAssistant ,FcCallback ,FcFeedback   } from "react-icons/fc";
+import CustomizedTimeline from './CustomizedTimeline';
+import OverviewSection from './OverviewSection';
 
 
-const AboutMeCard = ({ name, role, description, avatarSrc }) => {
-    return (
-      <Card>
-        <CardContent>
-          <Avatar alt={name} src={avatarSrc} style={{ width: 100, height: 100, marginBottom: 10 }} />
-          <Typography variant="h6" component="div">
-            {name}
-          </Typography>
-          <Typography color="text.secondary" gutterBottom>
-            {role}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {description}
-          </Typography>
-        </CardContent>
-      </Card>
-    );
+const activities = [
+    { title: 'Meeting with Team', date: '2024-01-20', description: 'Discuss project updates', type: 'event' },
+    { title: 'Client Call', date: '2024-01-22', description: 'Review project requirements', type: 'task' },
+    // Add more activities as needed
+  ];
+  const userStats = {
+    followers: 500,
+    following: 200,
+    answersPosted: 100,
+    questionsRaised: 50,
   };
+const AboutValues = [
+    {
+        "aboutHeader": "FullName",
+        "aboutValue": "Vikas",
+        "aboutIcon":<FcBusinessman />
+    },
+    {
+        "aboutHeader": "Status",
+        "aboutValue": "Active",
+        "aboutIcon":<FcTreeStructure/>
+    },
+    {
+        "aboutHeader": "Role",
+        "aboutValue": "Software Engineer",
+        "aboutIcon":<FcSupport />
+    },
+    {
+        "aboutHeader": "Country",
+        "aboutValue": "India",
+        "aboutIcon":<FcGlobe />
+    },
+    {
+        "aboutHeader": "Languages",
+        "aboutValue": "Hindi , English",
+        "aboutIcon":<FcAssistant />
+    },
+]
+
+const ContactValues = [
+    {
+        "aboutHeader": "Phone",
+        "aboutValue": "9063669981",
+        "aboutIcon":<FcCallback  />
+    },
+    {
+        "aboutHeader": "Email",
+        "aboutValue": "Vikas@gmail.com",
+        "aboutIcon":<FcFeedback  />
+    },
+    
+]
+
+const AboutDesign = (props) => {
+    const {aboutIcon, aboutHeader, aboutValue } = props.about;
+    return (
+        <>
+            <Box sx={{ display: 'flex', gap:1, margin:'15px 0px', alignItems:'center'}}> 
+                {aboutIcon} 
+                <Typography variant='p' fontWeight='bold'>{aboutHeader} : </Typography>
+                <Typography variant='p'>{aboutValue}</Typography>
+            </Box>
+        </>
+    )
+}
+
+const BelowCards = () => {
+    return (
+        <>
+            <Grid container spacing={2}>
+                <Grid item xs={12} md={4}>
+                    <Paper sx={{ padding: '10px 25px' }}>
+                        <Typography variant="p" color="secondary" >About</Typography>
+                        <Divider sx={{ margin: '5px 0px' }} />
+                       { AboutValues.map((about,index)=>{
+                            return (
+                                <AboutDesign key= {index} about={about} />
+                            );
+                        })}                       
+                       <Typography variant="p" color="secondary" sx={{}}>Contact</Typography>
+                       <Divider sx={{ margin: '5px 0px' }} />
+                       { ContactValues.map((about,index)=>{
+                            return (
+                                <AboutDesign key= {index} about={about} />
+                            );
+                        })} 
+                        <Typography variant="p" color="secondary" sx={{}}>Designation</Typography>
+                       <Divider sx={{ margin: '5px 0px' }} />
+                       <Box sx={{ display: 'flex', gap:2, margin:'15px 0px'}}>
+                            <Typography variant='p' fontWeight='bold'>Designation : </Typography>
+                            <Typography variant='p'>Software Engineer</Typography>
+                         </Box>
+                    </Paper>
+                </Grid>
+
+               
+                <Grid item md={8}>
+                    <Paper sx={{padding:'10px 25px'}}>
+                        <Typography variant='p' color="secondary">Activity TimeLine</Typography>
+                        <Divider sx={{ margin: '5px 0px' }} />
+                        <CustomizedTimeline  activities={activities}/>
+                    </Paper>
+                  
+                </Grid>
+            </Grid>
+        </>
+    )
+}
 
 const ProfilePage = () => {
     return (
         <Box maxWidth="lg">
-            <Paper elevation={3} >
+            <Paper elevation={3}>
                 {/* Background Cover */}
                 <motion.div
                     initial={{ opacity: 0, y: -100 }}
@@ -59,12 +154,10 @@ const ProfilePage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <Box sx={{ display: "flex", justifyContent: 'space-between', alignItems: 'center', margin: { xs: '0', md: '0px 30%' }, color: '#9003FC' }}>
+                    <Box sx={{ display: "flex", justifyContent: 'space-between', alignItems: 'center', margin: { xs: '0', md: '0px 30%' },padding:'10px 5px' }}>
                         <Box>
                             {/* <Typography variant="h6">Profession</Typography> */}
-                            <Avatar sx={{ height: 30, width: 30, backgroundColor: '#9003FC', margin: 'auto' }}>
-                                <FolderIcon />
-                            </Avatar>
+                            <Avatar sx={{ margin: 'auto' }} src={workerGif} />
 
                             <Typography>
                                 Software Engineer
@@ -72,18 +165,15 @@ const ProfilePage = () => {
                         </Box>
                         <Box>
                             {/* <Typography variant="h6">Location</Typography> */}
-                            <Avatar sx={{ height: 30, width: 30, backgroundColor: '#9003FC', margin: 'auto' }}>
-                                <FolderIcon />
-                            </Avatar>
+
+                            <Avatar alt="Remy Sharp" src={locationGif} sx={{ margin: 'auto' }} />
                             <Typography>
                                 Your Location
                             </Typography>
                         </Box>
                         <Box>
                             {/* <Typography variant="h6">Joined Date</Typography> */}
-                            <Avatar sx={{ height: 30, width: 30, backgroundColor: '#9003FC', margin: 'auto' }}>
-                                <FolderIcon />
-                            </Avatar>
+                            <Avatar sx={{ margin: 'auto' }} src={clockGif} />
                             <Typography>
                                 January 1, 2020 {/* Replace with the actual joined date */}
                             </Typography>
@@ -93,54 +183,18 @@ const ProfilePage = () => {
 
                 {/* Add more sections with animations as needed */}
             </Paper>
-
-            <Box sx={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: '10px', justifyContent: { xs: 'space-around', sm: 'flex-start' } }}>
+            
+            <OverviewSection {...userStats} />
+            <Box sx={{ display: 'flex', gap: 3, alignItems: 'center', margin: '10px 0px', justifyContent: { xs: 'space-around', sm: 'flex-start' } }}>
                 <Button color='secondary'>Profile</Button>
                 <Button color='secondary'>Followers</Button>
                 <Button color='secondary'>Following</Button>
             </Box>
 
-            <Box>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={8}>
-                        <Container>
-                            <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
-                            <Divider sx={{marginBottom:3}}>ABOUT</Divider>
-                            <AboutMeCard
-            name="John Doe"
-            role="Software Developer"
-            description="Passionate about coding and creating meaningful applications. Currently exploring the world of web development and loving every moment of it."
-            avatarSrc="https://example.com/avatar.jpg"
-          />
-                            </Paper>
-
-                            <Typography variant="h6" gutterBottom>
-                                Contacts
-                            </Typography>
-                            <Paper elevation={3} style={{ padding: '20px' }}>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12} sm={6}>
-                                        <Typography variant="h6">Contact:</Typography>
-                                        <Typography variant="body1">(123) 456-7890</Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6}>
-                                        <Typography variant="h6">Skype:</Typography>
-                                        <Typography variant="body1">john.doe</Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6}>
-                                        <Typography variant="h6">Email:</Typography>
-                                        <Typography variant="body1">john.doe@example.com</Typography>
-                                    </Grid>
-                                </Grid>
-                            </Paper>
-                        </Container>
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-
-                    </Grid>
-                </Grid>
-            </Box>
+            <BelowCards />
         </Box>
+
+
     );
 };
 

@@ -15,7 +15,7 @@ export const IS_MOBILE = () => {
 
 export const getUserFromLocalStorage=()=>{
     let userInfo = localStorage.getItem(USER_INFO);
-    return userInfo ? JSON.parse(atob(userInfo)) : JSON.parse("{}");
+    return userInfo ? JSON.parse(atob(userInfo)) : null;
 }
 
 export const setUserToLocalStorage=(userData)=>{

@@ -8,6 +8,10 @@ import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { USER_INFO, setUserToLocalStorage } from '../user/Utils';
 import { useDispatch } from 'react-redux';
 import { doLogin } from '../user/slices/userSlice';
+import { setAuthToken } from './../user/slices/authSlice';
+import { doLoginUser } from '../services/UserService';
+import { toast } from 'react-toastify';
+import Loader from '../loader/Loader';
 
 const AnimatedTextField = ({ label, type, name, value, onChange, icon }) => {
     return (
@@ -35,9 +39,10 @@ const AnimatedTextField = ({ label, type, name, value, onChange, icon }) => {
 const Login = () => {
     const dispatch = useDispatch()
     const [formData, setFormData] = useState({
-        email: '',
+        username: '',
         password: '',
     });
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -48,16 +53,26 @@ const Login = () => {
     };
 
     const navigate = useNavigate();
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true)
         // Add your login logic here using formData
         console.log('Login Data:', formData);
-        setUserToLocalStorage(formData)
-        dispatch(doLogin());
-        navigate('/user/dashboard')
+        try {
+            let response = await doLoginUser(formData);
+            dispatch(setAuthToken(JSON.stringify(response)));
+            dispatch(doLogin());
+            navigate('/user/dashboard', { state: { message: 'Logged in successfully' } })
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response.data.message || "Please enter valid details :")
+        } finally {
+            setIsLoading(false)
+        }
+
     };
 
-    return (
+    return isLoading ? <Loader /> : (
         <Container maxWidth="sm" sx={{ marginTop: 10, height: '60vh' }}>
             <Typography variant="h4" align="center" sx={{ marginBottom: '20px' }}>
                 Login
@@ -66,7 +81,7 @@ const Login = () => {
                 <AnimatedTextField
                     label="Email"
                     type="email"
-                    name="email"
+                    name="username"
                     value={formData.email}
                     onChange={handleChange}
                     icon={<MdEmail size={24} style={{ marginRight: '10px' }} />}
@@ -85,16 +100,16 @@ const Login = () => {
                         marginTop: '20px',
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' },
-                        gap:{xs:2},
+                        gap: { xs: 2 },
                         justifyContent: 'space-around',
-                        alignItems:{xs:'center'}
+                        alignItems: { xs: 'center' }
                     }}
                 >
                     <Button type="submit" variant="contained" color="secondary" onClick={handleSubmit}
-                    sx={{
-                        width:{xs:'150px'}
+                        sx={{
+                            width: { xs: '150px' }
 
-                    }}
+                        }}
                     >
                         Login
                     </Button>
